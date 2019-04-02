@@ -3,11 +3,6 @@ This is a SPA written in Vue and interacts with a Rails REST framework
 
 ### To Run Locally
 
-Simply perform
-
-``` bash
-make run
-```
 
 Here is the step by step setup/installation process:
 ``` bash
