@@ -68,6 +68,10 @@
         Description: {{ selectedRoute.description }}
         Location: {{ selectedRoute.location.name }}
       </template>
+      <template v-slot:footer>
+        Description: {{ selectedRoute.description }}
+        Location: {{ selectedRoute.location.name }}
+      </template>
     </modal>
   </div>
 </template>

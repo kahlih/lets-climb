@@ -37,11 +37,15 @@
         </slot>
       </div>
 
-      <slot name="body">
-      </slot>
+      <div class="modal-content_body">
+        <slot name="body">
+        </slot>
+      </div>
 
-      <slot name="footer">
-      </slot>
+      <div class="modal-content_footerr">
+        <slot name="footer">
+        </slot>
+      </div>
     </div>
 
   </div>
@@ -73,6 +77,7 @@
     padding: 20px 35px;
     border: 1px solid #888;
     width: 45%;
+    text-align: left; 
   }
 
   /* The Close Button */
@@ -93,6 +98,10 @@
   .modal-content_header {
     font-size: 24px;
     font-weight: 600;
+    padding: 5px 0px;
+  }
+
+  .modal-content_body {
     padding: 5px 0px;
   }
 </style>

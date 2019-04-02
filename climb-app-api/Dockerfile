@@ -10,5 +10,3 @@ COPY Gemfile.lock /myapp/Gemfile.lock
 RUN bundle install
 
 COPY . /myapp
-VOLUME /myapp
-EXPOSE 4567

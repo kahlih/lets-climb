@@ -27,7 +27,8 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/routes">Routes</router-link>
+      <router-link to="/routes" v-if="isLoggedIn">Routes</router-link>
+      <router-link to="/" v-else>Home</router-link>
       <span v-if="isLoggedIn"> | <a @click="logout">Logout</a></span>
       <span v-else> | <router-link to="/register">Create Account</router-link> </span>
     </div>
