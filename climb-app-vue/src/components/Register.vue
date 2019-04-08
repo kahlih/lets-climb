@@ -24,32 +24,55 @@
 </script>
 
 <template>
-  <div>
-    <h4>Register</h4>
+  <div class="register">
+    <h1 class="register_header">Register</h1>
     <form @submit.prevent="register">
-      <label for="username">Name</label>
-      <div>
+      <div class="register_input-field">
+        <label for="username">Name</label>
+        <div>
           <input id="username" type="text" v-model="username" required autofocus>
+        </div>
       </div>
 
-      <label for="email" >E-Mail Address</label>
-      <div>
-          <input id="email" type="email" v-model="email" required>
+      <div class="register_input-field">
+        <label for="email">E-mail Address</label>
+        <div>
+          <input id="email" type="text" v-model="email" required autofocus>
+        </div>
       </div>
 
-      <label for="password">Password</label>
-      <div>
-          <input id="password" type="password" v-model="password" required>
+      <div class="register_input-field">
+        <label for="password">Password</label>
+        <div>
+          <input id="password" type="text" v-model="password" required autofocus>
+        </div>
       </div>
 
-      <label for="password-confirm">Confirm Password</label>
-      <div>
+      <div class="register_input-field">
+        <label for="password-confirm">Confirm Password</label>
+        <div>
           <input id="password-confirm" type="password" v-model="password_confirmation" required>
+        </div>
       </div>
 
       <div>
-          <button type="submit">Register</button>
+        <button class="button" type="submit">Register</button>
       </div>
     </form>
   </div>
 </template>
+
+<style>
+  .register {
+    padding: 20px 0px;
+  }
+  .register_header {
+    margin-bottom: 5px;
+  }
+  .register_input-field {
+    padding: 10px 0px;
+  }
+  .register_button {
+    padding: 5px 0px;
+  }
+</style>

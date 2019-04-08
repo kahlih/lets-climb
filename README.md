@@ -25,6 +25,11 @@ rake db:create db:migrate
 rails s
 ```
 
+Or to run it in one fellow swoop:
+```
+(cd climb-app-api/ && (rails s > dev/log.txt &) && cd ..) && (cd climb-app-vue/ && npm run serve)
+```
+
 ### Tech Stack
 
 Languages:

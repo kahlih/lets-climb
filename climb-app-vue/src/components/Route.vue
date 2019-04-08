@@ -1,11 +1,6 @@
 <script>
-  import Modal from './common/Modal.vue'
-
   export default {
     name: 'route',
-    components: {
-      Modal
-    },
     data() {
       return {
       }

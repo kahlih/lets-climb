@@ -1,14 +1,16 @@
 <script>
+  import AddRoute from './AddRoute.vue'
   import StatusColumn from './StatusColumn.vue'
 
   export default {
     components: {
+      AddRoute,
       StatusColumn
     },
     created: function () {
       this.$store.dispatch('userRoutes')
     },
-    computed : {
+    computed: {
       routes : function(){ return this.$store.getters.userRoutes }, //change to mapGetters
       completedRoutes() {
         return this.routes.filter(route => route.completed)
@@ -25,6 +27,7 @@
 
 <template>
   <div class="route-listing">
+    <add-route class="route-listing_add-button"/>
     <div class="route-listing_container">
       <status-column :routes="toDoRoutes" statusName="To Do"></status-column>
       <status-column :routes="inProgressRoutes" statusName="In Progress"></status-column>

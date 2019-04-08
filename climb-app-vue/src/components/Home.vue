@@ -1,6 +1,11 @@
 <script>
+import Delimiter from './common/Delimiter.vue'
+
 export default {
   name: 'home',
+  components: {
+    Delimiter
+  },
   data () {
     return {
       quotes: [
@@ -25,11 +30,13 @@ export default {
         Let's Climb
       </div>
 
+      <br>
+
       <div class="landing__subheader">
         A simple app to keep track of the climbing routes you hope to one day conquer.
       </div>
       <div class="landing__subheader">
-        Create an account to get started.
+        Create an account or login to get started.
       </div>
 
       <div class="landing__ctas">
@@ -63,12 +70,13 @@ export default {
   .landing__header {
     width: 100%;
     font-weight: bold;
-    font-size: 36px;
+    font-size: 48px;
     padding: 5px 0px 10px;
   }
 
   .landing__subheader {
-    font-size: 18px;
+    font-size: 22px;
+    line-height: 36px;
   }
 
   .landing__ctas{
@@ -77,6 +85,6 @@ export default {
 
   .landing__quotes {
     font-style: italic;
-    font-size: 12px;
+    font-size: 16px;
   }
 </style>

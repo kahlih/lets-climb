@@ -9,7 +9,8 @@ export default new Vuex.Store({
     status: '',
     token: localStorage.getItem('token') || '',
     user : {},
-    routes: []
+    routes: [],
+    locations: []
   },
   mutations: {
     auth_request(state){
@@ -29,6 +30,12 @@ export default new Vuex.Store({
     },
     set_user_routes(state, routesData) {
       state.routes = routesData
+    },
+    set_locations(state, locations) {
+      state.locations = locations
+    },
+    add_user_route(state, route) {
+      state.routes.push(route)
     }
   },
   actions: {
@@ -78,18 +85,39 @@ export default new Vuex.Store({
         })
       })
     },
+    locations({commit}) {
+      return new Promise((resolve, reject) => {
+        axios({url: 'http://localhost:3000/locations', method: 'GET' })
+        .then(resp => {
+          commit('set_locations', resp.data)
+          resolve(resp)
+        })
+        .catch(err => {
+          reject(err)
+        })
+      })
+    },
     // routes are always authenticated b/c we set headers in main.js
     userRoutes({commit}) {
       return new Promise((resolve, reject) => {
-        commit('auth_request')
         axios({url: 'http://localhost:3000/user_routes', method: 'GET' })
         .then(resp => {
           commit('set_user_routes', resp.data)
           resolve(resp)
         })
         .catch(err => {
-          commit('auth_error')
-          localStorage.removeItem('token')
+          reject(err)
+        })
+      })
+    },
+    addRoute({commit}, data) {
+      return new Promise((resolve, reject) => {
+        axios({url: 'http://localhost:3000/user_routes', data: {route: data}, method: 'POST' })
+        .then(resp => {
+          commit('add_user_route', resp.data)
+          resolve(resp)
+        })
+        .catch(err => {
           reject(err)
         })
       })
@@ -98,6 +126,7 @@ export default new Vuex.Store({
   getters : {
     isLoggedIn: state => !!state.token,
     authStatus: state => state.status,
-    userRoutes: state => state.routes
+    userRoutes: state => state.routes,
+    locations: state => state.locations
   }
 })

@@ -1,4 +1,5 @@
 climb-app-api/tmp
 climb-app-api/log
+climb-app-api/dev
 climb-app-vue/.node_modules
 tmp/
