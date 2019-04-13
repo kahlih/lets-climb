@@ -1,16 +1,21 @@
 <script>
   import Route from './Route.vue'
   import Modal from './common/Modal.vue'
+  import RouteModal from './RouteModal.vue'
+  import NewRouteAttemptModal from './NewRouteAttemptModal.vue'
 
   export default {
     name: 'status-column',
     components: {
       Route,
-      Modal
+      Modal,
+      RouteModal,
+      NewRouteAttemptModal
     },
     data() {
       return {
         showModal: false,
+        showRouteAttemptForm: false,
         routeIndexForModal: 0
       }
     },
@@ -38,6 +43,12 @@
       },
       selectedRoute() {
         return this.routes[this.routeIndexForModal];
+      },
+      showDetailModal() {
+        return this.selectedRoute && this.selectedRoute.length !== 0;
+      },
+      displayRouteAttemptForm() {
+        return this.selectedRoute && this.showRouteAttemptForm;
       }
     },
     methods: {
@@ -45,8 +56,15 @@
         this.showModal = true
         this.routeIndexForModal = index
       },
-      closeModal() {
-        this.showModal = false
+      updateShowModal(value) {
+        this.showModal = value
+      },
+      recordRouteAttempt() {
+        this.showModal = false // change
+        this.showRouteAttemptForm = true;
+      },
+      closeAttemptModalForm() {
+        this.showRouteAttemptForm = false;
       }
     }
   }
@@ -60,19 +78,11 @@
         <route :route="route" @click="displayModal(index)"/>
       </span>
     </div>
-    <modal v-if="selectedRoute" :displayModal="showModal" :route="selectedRoute" @closeModal="closeModal">
-      <template v-slot:header>
-        Detail on {{ selectedRoute.name }}
-      </template>
-      <template v-slot:body>
-        Description: {{ selectedRoute.description }}
-        Location: {{ selectedRoute.location.name }}
-      </template>
-      <template v-slot:footer>
-        Description: {{ selectedRoute.description }}
-        Location: {{ selectedRoute.location.name }}
-      </template>
-    </modal>
+
+    <route-modal v-if="selectedRoute" :selectedRoute="selectedRoute" :showModal="showModal" @updateShowModal="updateShowModal" @recordRouteAttempt="recordRouteAttempt">
+    </route-modal>
+    <new-route-attempt-modal v-if="selectedRoute" :selectedRoute="selectedRoute" :showModal="displayRouteAttemptForm" @closeAttemptModalForm="closeAttemptModalForm">
+    </new-route-attempt-modal>
   </div>
 </template>
 
@@ -102,4 +112,5 @@
   .status-column_body {
     background-color: #F8F8F8;
   }
+
 </style>

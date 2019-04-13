@@ -21,7 +21,7 @@
     methods: {
       close() {
         this.$emit('closeModal');
-      },
+      }
     },
   }
 </script>
@@ -42,7 +42,7 @@
         </slot>
       </div>
 
-      <div class="modal-content_footerr">
+      <div class="modal-content_footer">
         <slot name="footer">
         </slot>
       </div>
@@ -76,8 +76,8 @@
     margin: auto;
     padding: 20px 35px;
     border: 1px solid #888;
-    width: 45%;
-    text-align: left; 
+    width: 35%;
+    text-align: left;
   }
 
   /* The Close Button */
@@ -103,5 +103,10 @@
 
   .modal-content_body {
     padding: 5px 0px;
+  }
+
+  .modal-content_footer {
+    display: flex;
+    justify-content: flex-end;
   }
 </style>

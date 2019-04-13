@@ -10,7 +10,8 @@ export default new Vuex.Store({
     token: localStorage.getItem('token') || '',
     user : {},
     routes: [],
-    locations: []
+    locations: [],
+    route_attempts: []
   },
   mutations: {
     auth_request(state){
@@ -36,6 +37,21 @@ export default new Vuex.Store({
     },
     add_user_route(state, route) {
       state.routes.push(route)
+    },
+    add_user_route_attempt(state, info) {
+      let route_id = info["route_id"],
+          data = info["route_attempt"],
+          routeIndex = state.routes.findIndex((object) => object.id === route_id)
+      if (data.success) {
+        state.routes[routeIndex].completed = true;
+        state.routes[routeIndex].in_progress = false;
+        state.routes[routeIndex].todo = false;
+      } else { // regardless, route attempt is recorded, so route is in progress
+        state.routes[routeIndex].in_progress = true;
+        state.routes[routeIndex].todo = false;
+        state.routes[routeIndex].completed = false;
+      }
+      state.route_attempts.push(data)
     }
   },
   actions: {
@@ -115,6 +131,23 @@ export default new Vuex.Store({
         axios({url: 'http://localhost:3000/user_routes', data: {route: data}, method: 'POST' })
         .then(resp => {
           commit('add_user_route', resp.data)
+          resolve(resp)
+        })
+        .catch(err => {
+          reject(err)
+        })
+      })
+    },
+    addRouteAttempt({commit}, data) {
+      return new Promise((resolve, reject) => {
+        let route_id = data["route_id"];
+        axios({url: 'http://localhost:3000/route_attempts', data: {route_attempt: data}, method: 'POST' })
+        .then(resp => {
+          let info = {
+            route_attempt: resp.data,
+            route_id: route_id
+          }
+          commit('add_user_route_attempt', info)
           resolve(resp)
         })
         .catch(err => {

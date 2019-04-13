@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2019_03_30_002858) do
   create_table "route_attempts", force: :cascade do |t|
     t.string "summary"
     t.integer "user_route_id"
+    t.datetime "recorded_at", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
