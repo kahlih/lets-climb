@@ -4,8 +4,6 @@
 - Json Web Token (JWT)
 - PostgreSQL
 - Bcrypt
-- Cloudinary
-- Carrierwave
 
 ## Installation
 
